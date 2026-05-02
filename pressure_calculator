@@ -1,0 +1,7 @@
+# Calculator: Pressure = Force / Area
+a = float(input("Enter the area (m^2): "))
+f = float(input("Enter the force (N): "))
+
+pressure = round(f / a, 3)
+
+print(f"Pressure = {f} / {a} = {pressure} N/m^2")

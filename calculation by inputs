@@ -1,0 +1,7 @@
+number1 = float(input("Give me number1: "))
+number2 = float(input("Give me number2: "))
+
+print(f"{number1} + {number2} = {number1 + number2}")
+print(f"{number1} - {number2} = {number1 - number2}")
+print(f"{number1} * {number2} = {number1 * number2}")
+print(f"{number1} / {number2} = {round(number1 / number2, 3)}")
