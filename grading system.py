@@ -1,4 +1,4 @@
-grades = []
+grades = [] # edited from laptop - magic test
 gaa= 0
 
 while True:
