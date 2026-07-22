@@ -1,0 +1,57 @@
+section 1
+q1: the difference it that / is division with decimal point for example 6/5 = 1.2 and // is division that turn into an a whole number without the decimal number so 6//5 = 1.
+  
+q2:.split function takes a sentence of strings and turn it into a list with every word in the sentence for example sentence = claude is a good ai 
+sentence.split() = [claude ,is ,a , good ,ai].
+
+q3: the difference is that print() only works on the terminal screen and return also sand the value of the variable back into the program to another functions.
+
+q4: i will get a keyerror because the key is not in the dictionary.
+
+q5: the code inside the except run only after an error type accord in the program for example ValueError  will run after the code in the try dident had any value in it.
+
+section 2:
+
+q6: 3 2 
+
+q7: 6
+
+q8: 13 21
+
+q9: 3 1
+
+q10: b
+
+q11: 42 -1 100
+
+section 3 
+
+q12: the problem is that count+ 1 because it doesn't store the value of the variable anywhere in the program it could be fix with count += 1 
+
+q13: the issue is the if statement because if the number is between 1 and 17 the program wouldn't word because there isn't any statement that said this it could be fixed with else
+
+q14: the issue is the if letter == "a" or "e" or "i" or "o" or "u": in order to fix that you can change it into if letter == "aeiou"
+
+q15: the issue is in the return total/len(numbers) because you told it that total = numbers so you are dividing the list in the len(numbers) in order to fix that implement sum(total)/len(numbers)
+
+section 4:
+
+q16: 
+def count_long_words(words , minimum):
+    above_average = []
+    for w in words:
+        if len(w) > minimum:
+            above_average.append(w)
+        else:
+            continue
+    return above_average        
+
+
+q17:
+
+def safe_grade_lookup(dict, name):
+
+ try:
+   return dict[name]
+ except KeyError:
+  return "student Not Found"
