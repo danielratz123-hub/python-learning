@@ -10,6 +10,21 @@ def get_input(message):
         return None
 
     return value
+def overwrite_check():
+        while True:
+         check = input("Contact already exists — do you want to overwrite? (yes/no)")  
+         if check.strip().lower() == "yes": 
+          return True
+         
+         elif check.strip().lower() == "no": 
+          return False
+         
+         else:
+          print("invalid choice try again")
+          
+     
+
+            
 def menu():
     while True:
         print("\n=== contact manager ===")
@@ -42,6 +57,12 @@ def menu():
 
 def add_contacts():
     name = get_input("Enter a contact name: ")
+
+    if name in contacts:
+       answer = overwrite_check()
+       if answer == False:
+           return
+
     if name is None:
         return
     phone = get_input("Enter a phone number: ")
