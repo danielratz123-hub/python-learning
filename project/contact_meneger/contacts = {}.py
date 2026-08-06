@@ -10,19 +10,18 @@ def get_input(message):
         return None
 
     return value
-def overwrite_check():
+def yes_or_no(question):
         while True:
-         check = input("Contact already exists — do you want to overwrite? (yes/no)")  
-         if check.strip().lower() == "yes": 
+         answer = input(question)
+
+         if answer.strip().lower() == "yes": 
           return True
          
-         elif check.strip().lower() == "no": 
+         elif answer.strip().lower() == "no": 
           return False
          
          else:
           print("invalid choice try again")
-          
-     
 
             
 def menu():
@@ -42,7 +41,7 @@ def menu():
         if choice == "1":
             add_contacts()
         elif choice == "2":
-            print("Remove the contact here")
+            remove_contacts()
         elif choice == "3":
             show_contact_list()
         elif choice == "4":
@@ -50,17 +49,19 @@ def menu():
         elif choice == "5":
             print("Edit the contact")
         elif choice == "6":
-            print("Goodbye.")
-            break
+         if not yes_or_no("Are you sure you want to exit the program? (yes/no): "):
+          continue
+
+         print("Goodbye.")
+         break
         else:
-            print("invalid choise try again")   
+         print("Invalid choice, try again.")  
 
 def add_contacts():
     name = get_input("Enter a contact name: ")
 
     if name in contacts:
-       answer = overwrite_check()
-       if answer == False:
+       if not yes_or_no("Contact already exists — do you want to overwrite? (yes/no)"):
            return
 
     if name is None:
@@ -86,6 +87,23 @@ def add_contacts():
     }
     print(f"contact {name} added successfully")
 
+
+def remove_contacts():
+   while True:
+      name = get_input("Enter a contact name: ")
+      if name is None:
+              return
+
+      if name.strip().lower() in contacts:
+        if not yes_or_no(F"Are you sure you want to remove {name} from the list? (yes/no)"):
+         return
+        del contacts[name]
+        print(f"contact {name} removed successfully ")
+        return False
+      else:
+        print("contact not found try again:")
+
+
 def show_contact_list():
     print("\n===== Contact List =====")
 
@@ -100,4 +118,6 @@ def show_contact_list():
         print(f"Email: {info['email']}")
         print(f"City: {info['city']}")
         print(f"Category: {info['category']}")
+
+
 menu()
