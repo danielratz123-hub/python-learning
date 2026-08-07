@@ -4,7 +4,7 @@ def is_cancelled(value):
     return value.strip().lower() == "cancel"
 
 def get_input(message):
-    value = input(message).strip()
+    value = input(message).strip().lower()
 
     if is_cancelled(value):
         return None
@@ -94,7 +94,7 @@ def remove_contacts():
       if name is None:
               return
 
-      if name.strip().lower() in contacts:
+      if name in contacts:
         if not yes_or_no(F"Are you sure you want to remove {name} from the list? (yes/no)"):
          return
         del contacts[name]
