@@ -23,6 +23,8 @@ def yes_or_no(question):
          else:
           print("invalid choice try again")
 
+
+
             
 def menu():
     while True:
@@ -47,7 +49,7 @@ def menu():
         elif choice == "4":
             print("search for the contact")
         elif choice == "5":
-            print("Edit the contact")
+            edit_contact()
         elif choice == "6":
          if not yes_or_no("Are you sure you want to exit the program? (yes/no): "):
           continue
@@ -119,5 +121,72 @@ def show_contact_list():
         print(f"City: {info['city']}")
         print(f"Category: {info['category']}")
 
+def edit_contact():
+     while True:
+      edit = get_input("Enter a contact name:")
+      if edit is None:
+       return
+      if edit in contacts:
+         break
+      else:
+       print("contact not found try again ")
 
+       
+     while True:
+        print(" choose a field to edit: ")
+        print("1.name")
+        print("2.phone")
+        print("3.email")
+        print("4.city")
+        print("5.category")
+
+        choice = get_input("enter a number: ")
+        if choice is None:    
+         return
+
+        elif choice == "1":
+         print("name")    
+
+        elif choice == "2":
+          print(f"Current phone: {contacts[edit]['phone']}")   
+          new_phone = get_input("Enter a new phone: ")          
+          if new_phone is None:                                 
+            continue
+          if yes_or_no("Save this change? (yes/no): "):         
+           contacts[edit]["phone"] = new_phone               
+           print("Phone has successfully updated.")
+
+        elif choice == "3":
+
+            print(f"Current email: {contacts[edit]['email']}")   
+            new_email = get_input("Enter a new email: ")          
+            if new_email is None:                                 
+              continue
+            if yes_or_no("Save this change? (yes/no): "):         
+              contacts[edit]["email"] = new_email               
+              print("email has successfully updated.")
+
+        elif choice == "4":
+         
+         print(f"Current city: {contacts[edit]['city']}")   
+         new_city = get_input("Enter a new city: ")          
+         if new_city is None:                                 
+          continue
+         if yes_or_no("Save this change? (yes/no): "):         
+          contacts[edit]["city"] = new_city               
+         print("city has successfully updated.")
+
+        elif choice == "5":
+
+            print(f"Current category: {contacts[edit]['category']}")   
+            new_category = get_input("Enter a new category: ")          
+            if new_category is None:                                 
+             continue
+            if yes_or_no("Save this change? (yes/no): "):         
+             contacts[edit]["category"] = new_category               
+            print("category has successfully updated.")
+        else:
+            print("invalid option try again")
+         
+   
 menu()
