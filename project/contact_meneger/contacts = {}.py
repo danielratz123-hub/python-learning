@@ -23,7 +23,15 @@ def yes_or_no(question):
          else:
           print("invalid choice try again")
 
-
+def display_contacts(number,name,info):
+   
+   print(f"\nContact {number}")
+   print(f"Name: {name}")
+   print(f"Phone: {info['phone']}")
+   print(f"Email: {info['email']}")
+   print(f"City: {info['city']}")
+   print(f"Category: {info['category']}")
+   
 
             
 def menu():
@@ -47,7 +55,7 @@ def menu():
         elif choice == "3":
             show_contact_list()
         elif choice == "4":
-            search_list()
+            search_contacts()
         elif choice == "5":
             edit_contact()
         elif choice == "6":
@@ -101,7 +109,7 @@ def remove_contacts():
          return
         del contacts[name]
         print(f"contact {name} removed successfully ")
-        return False
+        return
       else:
         print("contact not found try again:")
 
@@ -114,13 +122,7 @@ def show_contact_list():
         return
 
     for number, (name, info) in enumerate(contacts.items(), start=1):
-        print(f"\nContact {number}")
-        print(f"Name: {name}")
-        print(f"Phone: {info['phone']}")
-        print(f"Email: {info['email']}")
-        print(f"City: {info['city']}")
-        print(f"Category: {info['category']}")
-
+      display_contacts(number,name,info)
 def edit_contact():
      while True:
       edit = get_input("Enter a contact name:")
@@ -147,19 +149,19 @@ def edit_contact():
         elif choice == "1":
           print(f"Current name: {edit}")   
           new_name = get_input("Enter a new name: ")          
-          if new_name is None:                                 
-             continue
+          if new_name is None:              
+             continue      
+          if new_name == edit:                  
+             print("That's already the name — no change made.")
+             continue                      
           if new_name in contacts:
-            if not yes_or_no("Contact already exists — do you want to overwrite? (yes/no)"):
-             continue  
+             if not yes_or_no("Contact already exists — do you want to overwrite? (yes/no)"):
+               continue
           if yes_or_no("Save this change? (yes/no): "):
            contacts[new_name]=contacts[edit]
            del contacts[edit]
            edit = new_name
            print("name has successfully updated.")
-          
-          
-          
 
         elif choice == "2":
           print(f"Current phone: {contacts[edit]['phone']}")   
@@ -201,7 +203,7 @@ def edit_contact():
             print("category has successfully updated.")
         else:
             print("invalid option try again")
-def search_list():
+def search_contacts():
  while True:
     search = get_input("Enter a name for searching: ")
     if search is None:
@@ -213,18 +215,13 @@ def search_list():
     for name , info in contacts.items():
        if search in name:
           matched_contacts[name] = info
-    print(f"there are {len(matched_contacts)} results with that name:")
 
     if not matched_contacts:
            print("contact was not found try again")
 
     else:
+       print(f"there are {len(matched_contacts)} results with that name:")
        for number, (name, info) in enumerate(matched_contacts.items(), start=1):
-         print(f"\nContact {number}")
-         print(f"Name: {name}")
-         print(f"Phone: {info['phone']}")
-         print(f"Email: {info['email']}")
-         print(f"City: {info['city']}")
-         print(f"Category: {info['category']}")
-
+        display_contacts(number,name,info)
+          
 menu()
