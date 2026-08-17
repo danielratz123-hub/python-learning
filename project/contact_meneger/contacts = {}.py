@@ -19,7 +19,7 @@ def yes_or_no(question):
          
          elif answer.strip().lower() == "no": 
           return False
-         
+
          else:
           print("invalid choice try again")
 
@@ -47,7 +47,7 @@ def menu():
         elif choice == "3":
             show_contact_list()
         elif choice == "4":
-            print("search for the contact")
+            search_list()
         elif choice == "5":
             edit_contact()
         elif choice == "6":
@@ -133,7 +133,7 @@ def edit_contact():
 
        
      while True:
-        print(" choose a field to edit: ")
+        print(" choose a field to edit or cancel to return: ")
         print("1.name")
         print("2.phone")
         print("3.email")
@@ -145,7 +145,21 @@ def edit_contact():
          return
 
         elif choice == "1":
-         print("name")    
+          print(f"Current name: {edit}")   
+          new_name = get_input("Enter a new name: ")          
+          if new_name is None:                                 
+             continue
+          if new_name in contacts:
+            if not yes_or_no("Contact already exists — do you want to overwrite? (yes/no)"):
+             continue  
+          if yes_or_no("Save this change? (yes/no): "):
+           contacts[new_name]=contacts[edit]
+           del contacts[edit]
+           edit = new_name
+           print("name has successfully updated.")
+          
+          
+          
 
         elif choice == "2":
           print(f"Current phone: {contacts[edit]['phone']}")   
@@ -187,6 +201,30 @@ def edit_contact():
             print("category has successfully updated.")
         else:
             print("invalid option try again")
-         
-   
+def search_list():
+ while True:
+    search = get_input("Enter a name for searching: ")
+    if search is None:
+       return
+    
+    matched_contacts = {}
+
+
+    for name , info in contacts.items():
+       if search in name:
+          matched_contacts[name] = info
+    print(f"there are {len(matched_contacts)} results with that name:")
+
+    if not matched_contacts:
+           print("contact was not found try again")
+
+    else:
+       for number, (name, info) in enumerate(matched_contacts.items(), start=1):
+         print(f"\nContact {number}")
+         print(f"Name: {name}")
+         print(f"Phone: {info['phone']}")
+         print(f"Email: {info['email']}")
+         print(f"City: {info['city']}")
+         print(f"Category: {info['category']}")
+
 menu()
